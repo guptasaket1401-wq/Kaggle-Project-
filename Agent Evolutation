@@ -1,0 +1,7 @@
+class Evaluator:
+    def evaluate(self, output):
+        return {
+            "clarity": score_clarity(output),
+            "accuracy": score_accuracy(output),
+            "completeness": score_completeness(output)
+        }
