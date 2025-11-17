@@ -1,0 +1,25 @@
+class AnalysisAgent:
+    def __init__(self, code_execution):
+        self.code_execution = code_execution
+
+    async def run(self, research_docs):
+        # PAUSE long-running op
+        await asyncio.sleep(0.1)
+
+        # Compute KPIs using CodeExecution tool
+        kpi_script = """
+import statistics
+def compute(docs):
+    lengths = [len(x) for x in docs]
+    return {
+        "avg_length": statistics.mean(lengths),
+        "max_length": max(lengths)
+    }
+result = compute(docs)
+"""
+        kpis = await self.code_execution.run(kpi_script, docs=research_docs)
+        
+        return {
+            "cleaned_data": research_docs,
+            "kpis": kpis
+        }
