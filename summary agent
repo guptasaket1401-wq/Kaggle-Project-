@@ -1,0 +1,19 @@
+class SummaryAgent:
+    def __init__(self, memory_bank):
+        self.memory_bank = memory_bank
+
+    async def run(self, analysis_output):
+        # Context compaction
+        compacted = analysis_output["cleaned_data"][:3]
+
+        enterprise_knowledge = self.memory_bank.get("EnterpriseKnowledge")
+
+        prompt = f"""
+Using enterprise style and the following domain rules: {enterprise_knowledge},
+summarize the documents:
+{compacted}
+
+KPIs:
+{analysis_output["kpis"]}
+"""
+        return llm(prompt)
