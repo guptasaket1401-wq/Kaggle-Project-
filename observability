@@ -1,0 +1,3 @@
+logger.info("ResearchAgent completed", count=len(research_docs))
+metrics.increment("research.documents_processed", len(research_docs))
+tracer.trace("analysis.kpi_computation")
