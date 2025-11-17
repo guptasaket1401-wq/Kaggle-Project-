@@ -1,0 +1,6 @@
+class Coordinator:
+    async def run(self, user_query):
+        research = await ResearchAgent.run(user_query)
+        analysis = await AnalysisAgent.run(research)
+        final = await SummaryAgent.run(analysis)
+        return final
